@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
+/* ── Tokens (dark, default) ──────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:       #08080e;
+  --bg2:      #0e0e18;
+  --surface:  rgba(255, 255, 255, 0.04);
+  --surface2: rgba(255, 255, 255, 0.07);
+  --border:   rgba(255, 255, 255, 0.08);
+  --border2:  rgba(255, 255, 255, 0.14);
+  --text:     #f0f0f4;
+  --text-2:   #7070a0;
+  --text-3:   #606082;   /* bumped from #40405a → ~3.5:1 contrast on dark bg */
+
+  /* Vivid flat accents — zero gradients */
+  --yellow:   #f5c518;
+  --red:      #e63946;
+  --green:    #2dc653;
+  --purple:   #a855f7;
+  --blue:     #3b82f6;
+
+  /* macOS traffic lights */
+  --mac-red:    #ff5f57;
+  --mac-yellow: #febc2e;
+  --mac-green:  #28c840;
+
+  /* Glass surfaces — themed so light mode can override */
+  --card-bg:      rgba(14, 14, 24, 0.80);
+  --card-bg-lt:   rgba(14, 14, 24, 0.60);
+  --nav-scrolled: rgba(14, 14, 22, 0.92);
+
+  /* Invert black SVG icons to white in dark mode */
+  --icon-invert: invert(1) brightness(10);
+}
+
+/* ── Light mode ─────────────────────────────────────────── */
+[data-theme="light"] {
+    --bg:       #f4f4f9;
+    --bg2:      #eaeaf2;
+    --surface:  rgba(0, 0, 0, 0.04);
+    --surface2: rgba(0, 0, 0, 0.07);
+    --border:   rgba(0, 0, 0, 0.09);
+    --border2:  rgba(0, 0, 0, 0.18);
+    --text:     #08080e;
+    --text-2:   #38385a;
+    --text-3:   #656580;
+
+    --card-bg:      rgba(255, 255, 255, 0.85);
+    --card-bg-lt:   rgba(255, 255, 255, 0.72);
+    --nav-scrolled: rgba(244, 244, 249, 0.92);
+    --icon-invert:  none;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ── Base ───────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--yellow); color: #000; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ── Floating tech symbols ──────────────────────────────── */
+@keyframes float-a {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  40%       { transform: translateY(-28px) rotate(6deg); }
+  70%       { transform: translateY(14px) rotate(-4deg); }
+}
+@keyframes float-b {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(22px) rotate(-8deg); }
+  66%       { transform: translateY(-18px) rotate(5deg); }
+}
+@keyframes float-c {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-24px) scale(1.05); }
+}
+
+/* ── Comet streaks ──────────────────────────────────────── */
+@keyframes comet {
+  0%   { transform: translateX(-420px) translateY(-420px); opacity: 0; }
+  6%   { opacity: 1; }
+  88%  { opacity: 0.6; }
+  100% { transform: translateX(calc(100vw + 420px)) translateY(calc(100vh + 420px)); opacity: 0; }
+}
+
+/* ── Marquee ────────────────────────────────────────────── */
+@keyframes marquee-fwd {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-rev {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.marquee-track       { display: flex; width: max-content; }
+.marquee-track--fwd  { animation: marquee-fwd 28s linear infinite; }
+.marquee-track--rev  { animation: marquee-rev 32s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── Cursor blink ───────────────────────────────────────── */
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+.cursor-blink { animation: blink 1s step-end infinite; }
+
+/* ── Comet streaks (theme-aware) ────────────────────────── */
+.scene-comet {
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0.9) 60%, transparent 100%);
+}
+[data-theme="light"] .scene-comet {
+  background: linear-gradient(to right, transparent 0%, rgba(80,80,130,0.18) 40%, rgba(80,80,130,0.32) 60%, transparent 100%);
+}
+
+/* ── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  /* Marquee kept intentional — slow, informational, non-vestibular */
+  .cursor-blink  { animation: none !important; opacity: 1; }
+  .animate-pulse { animation: none !important; }
+  .scene-symbol,
+  .scene-comet   { animation: none !important; }
 }
