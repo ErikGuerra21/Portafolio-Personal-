@@ -13,14 +13,6 @@ const SYMBOLS = [
   { content: "TS",  color: "#3178c6", size: 180, blur: 56, opacity: 0.07, top: "42%", left: "-2%",  anim: "float-b 23s ease-in-out infinite 4s" },
 ];
 
-const COMETS = [
-  { top: "12%",  left: "0",    delay: "0s",    duration: "9s"  },
-  { top: "30%",  left: "10%",  delay: "3.5s",  duration: "12s" },
-  { top: "55%",  left: "0",    delay: "7s",    duration: "10s" },
-  { top: "72%",  left: "20%",  delay: "11s",   duration: "8s"  },
-  { top: "20%",  left: "40%",  delay: "15s",   duration: "11s" },
-  { top: "88%",  left: "5%",   delay: "4s",    duration: "13s" },
-];
 
 export default function SceneBg() {
   return (
@@ -53,25 +45,6 @@ export default function SceneBg() {
         </div>
       ))}
 
-      {/* ── Comet streaks ── */}
-      {COMETS.map((c, i) => (
-        <div
-          key={i}
-          className="scene-comet"
-          style={{
-            position: "absolute",
-            top: c.top,
-            left: c.left,
-            width: 300,
-            height: 1.5,
-            borderRadius: 4,
-            transform: "rotate(35deg)",
-            transformOrigin: "left center",
-            animation: `comet ${c.duration} ${c.delay} linear infinite`,
-            filter: "blur(0.4px)",
-          }}
-        />
-      ))}
     </div>
   );
 }
