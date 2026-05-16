@@ -171,12 +171,12 @@ function ProjectModal({ project, labels, onClose }: { project: Project; labels: 
           <button
             onClick={onClose}
             aria-label={labels.modalClose}
-            className="flex items-center justify-center w-8 h-8 rounded-xl transition-colors"
+            className="flex items-center justify-center w-10 h-10 rounded-xl transition-colors"
             style={{ color: "var(--text-3)" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-3)"; }}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
           </button>
@@ -236,6 +236,15 @@ function ProjectModal({ project, labels, onClose }: { project: Project; labels: 
           {project.isPrivate && (
             <PrivateButtons labels={labels} accent={accent} />
           )}
+
+          {/* Mobile close button */}
+          <button
+            onClick={onClose}
+            className="sm:hidden w-full py-3 text-sm font-bold rounded-xl mt-2"
+            style={{ background: "var(--surface2)", color: "var(--text-2)", border: "1px solid var(--border)" }}
+          >
+            {labels.modalClose}
+          </button>
         </div>
       </motion.div>
     </motion.div>
@@ -383,7 +392,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-28 px-6 sm:px-12 lg:px-24">
+    <section id="projects" className="py-16 sm:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}

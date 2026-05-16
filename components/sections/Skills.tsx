@@ -107,9 +107,9 @@ export default function Skills() {
   const inView    = useInView(titleRef, { once: true });
 
   return (
-    <section id="skills" className="py-28 overflow-hidden">
+    <section id="skills" className="py-16 sm:py-28 overflow-hidden">
       {/* Header */}
-      <div className="px-6 sm:px-12 lg:px-24 mb-16">
+      <div className="px-6 sm:px-12 lg:px-24 mb-8 sm:mb-16">
         <motion.div
           ref={titleRef}
           initial={{ opacity: 0, y: 20 }}

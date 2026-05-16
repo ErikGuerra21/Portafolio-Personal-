@@ -11,7 +11,7 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="about" className="py-28 px-6 sm:px-12 lg:px-24" ref={ref}>
+    <section id="about" className="py-16 sm:py-28 px-6 sm:px-12 lg:px-24" ref={ref}>
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}

@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-24 pt-28 pb-20"
+      className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-24 pt-20 sm:pt-28 pb-20"
     >
       <motion.div
         variants={stagger}

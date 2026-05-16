@@ -138,7 +138,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-28 px-6 sm:px-12 lg:px-24 pb-32" ref={ref}>
+    <section id="contact" className="py-16 sm:py-28 px-6 sm:px-12 lg:px-24 pb-20 sm:pb-32" ref={ref}>
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
@@ -225,7 +225,7 @@ export default function Contact() {
             </p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-mono" style={{ color: "var(--text-3)" }}>
                     {tr.contact.form.name}
