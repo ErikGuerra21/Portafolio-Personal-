@@ -130,6 +130,5 @@ body {
   /* Marquee kept intentional — slow, informational, non-vestibular */
   .cursor-blink  { animation: none !important; opacity: 1; }
   .animate-pulse { animation: none !important; }
-  .scene-symbol,
-  .scene-comet   { animation: none !important; }
+
 }
